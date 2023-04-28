@@ -59,7 +59,7 @@ class ClusterStats : CliktCommand(help = "Creates a report about the database in
                             buildString {
                                 append("${it.key}\t")
                                 append("${it.value.groupHierarchy.first()}\t")
-                                val totalSize = it.value.stats.sumOf { it.sizes.file }
+                                val totalSize = it.value.stats.sumOf { it.sizes.active }
                                 append("${totalSize}\n")
                             }
                         )

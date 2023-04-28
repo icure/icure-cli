@@ -34,13 +34,13 @@ class GroupInfo : CliktCommand(help = "Show the information about a group") {
                         append("\t${db.db_name}:\n")
                         append("\t\tdocuments: ${db.doc_count}\n")
                         if (humanReadable)
-                            append("\t\tsize: ${humanReadableSize(Size(db.sizes.file.toDouble())).let { "${it.value} ${it.unit.stringValue}" }}\n")
+                            append("\t\tsize: ${humanReadableSize(Size(db.sizes.active.toDouble())).let { "${it.value} ${it.unit.stringValue}" }}\n")
                         else
-                            append("\t\tsize: ${db.sizes.file}\n")
+                            append("\t\tsize: ${db.sizes.active}\n")
                         append("\n")
                     }
                     append("Total documents: ${dbs.sumOf { it.doc_count }}\n")
-                    val totalSize = dbs.sumOf { it.sizes.file.toDouble() }
+                    val totalSize = dbs.sumOf { it.sizes.active.toDouble() }
                     if (humanReadable)
                         append("size: ${humanReadableSize(Size(totalSize)).let { "${it.value} ${it.unit.stringValue}" }}\n")
                     else
