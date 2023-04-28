@@ -20,13 +20,15 @@ import kotlinx.serialization.json.Json
 import java.io.FileWriter
 
 @ExperimentalSerializationApi
-class ClusterStats : CliktCommand(help = "Creates a report about the database in a server") {
+class ClusterStats : CliktCommand(help = "Creates a report of all the group databases in a cluster, divided by group, and saves it to a file.") {
     private val config by requireObject<CliktConfig>()
-    private val format by option().switch(
+    private val format by option(
+        help = "The output format. The .tsv format will contain only a summary of the data (group, root supergroup and size)"
+    ).switch(
         "--json" to ExportFormat.JSON,
         "--tsv" to ExportFormat.TSV
     ).default(ExportFormat.JSON)
-    private val outputFile by option("-o", "--output").path().required()
+    private val outputFile by option("-o", "--output", help = "The output file where to save the result").path().required()
 
     private val json = Json {
         prettyPrint = true

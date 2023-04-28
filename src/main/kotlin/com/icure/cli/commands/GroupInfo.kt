@@ -14,7 +14,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
 
-class GroupInfo : CliktCommand(help = "Show the information about a group") {
+class GroupInfo : CliktCommand(help = "Shows information about a group, namely the number of databases of that group, the number of documents, the size of the databases and the hierarchy of supergroups.") {
     private val config by requireObject<CliktConfig>()
     private val group by option("-g", "--group", help = "The group to show the information for").required()
     private val humanReadable by option("-H", help = "Show size values in Kb, Mb and Gb").flag()
