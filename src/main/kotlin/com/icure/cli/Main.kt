@@ -7,6 +7,8 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.default
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
+import com.icure.cli.commands.ClusterStats
+import com.icure.cli.commands.GroupInfo
 import com.icure.cli.commands.ListDatabases
 import com.icure.cli.commands.ListShards
 import com.icure.cli.couchdb.getClient
@@ -25,6 +27,8 @@ class ICurecli : CliktCommand() {
 }
 
 fun main(args: Array<String>) = ICurecli().subcommands(
+    ClusterStats(),
     ListDatabases(),
-    ListShards()
+    ListShards(),
+    GroupInfo()
 ).main(args)
