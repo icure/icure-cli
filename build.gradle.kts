@@ -1,7 +1,15 @@
 plugins {
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.serialization") version "1.8.10"
+    kotlin("jvm") version "1.9.21"
+    kotlin("plugin.serialization") version "1.9.21"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+
     application
+}
+
+buildscript {
+    dependencies {
+        classpath("gradle.plugin.com.github.johnrengelman:shadow:7.1.2")
+    }
 }
 
 group = "com.icure"
@@ -11,15 +19,33 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "2.2.3"
+kotlin {
+    jvmToolchain(21)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
+val ktorVersion = "2.3.9"
 
 dependencies {
-    implementation("io.ktor:ktor-client-core:$ktorVersion")
-    implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-    implementation("com.github.ajalt.clikt:clikt:3.5.2")
+    implementation(libs.bundles.io.ktor)
+    implementation(libs.com.github.ajalt.clikt)
+    implementation(libs.org.jetbrains.kotlinx.serialization.json)
+    implementation(libs.icure.kotlin.sdk)
+    implementation(libs.bundles.jackson.libs)
+    implementation(libs.async.jackson.http.client)
+    implementation(libs.springdoc.kotlin)
+    implementation(libs.icure.dto)
+    implementation(libs.ajalt.clikt)
+    implementation(libs.jline)
+    implementation(libs.logback)
     testImplementation(kotlin("test"))
 }
 
@@ -28,9 +54,25 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(11)
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(mapOf("Main-Class" to "com.icure.cli.MainKt"))
+    }
 }
 
 application {
     mainClass.set("com.icure.cli.MainKt")
+}
+
+distributions {
+    main {
+        contents {
+            from("./plugins") {
+                into("plugins")
+            }
+            from("./USAGE.md")
+        }
+    }
 }
