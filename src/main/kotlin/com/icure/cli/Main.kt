@@ -26,6 +26,7 @@ import java.net.URI
 import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.concurrent.CancellationException
 import java.util.jar.JarFile
 
 class RootCmd : CliktCommand() {
@@ -123,6 +124,10 @@ fun main(args: Array<String>) {
             } catch (e: EndOfFileException) {
                 break
             } catch (e: UserInterruptException) {
+                continue
+            } catch (e: CancellationException) {
+                continue
+            } catch (e: InterruptedException) {
                 continue
             } catch (e: Throwable) {
                 println("ERROR: ${e.cause}")
