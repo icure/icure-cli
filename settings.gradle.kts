@@ -1,4 +1,4 @@
-rootProject.name = "icurecli"
+rootProject.name = "icure-cli"
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
