@@ -33,6 +33,10 @@ class RootCmd : CliktCommand() {
     override fun run() {}
 }
 
+class Exit : CliktCommand() {
+    override fun run() { System.exit(0) }
+}
+
 class CommandsJarManager {
     fun commands(): List<CliktCommand> {
         val plugins =
@@ -48,6 +52,10 @@ class CommandsJarManager {
                 null
             } ?: try {
                 File("~/.iqr/plugins").takeIf { it.exists() && it.isDirectory() }?.path
+            } catch (e: Exception) {
+                null
+            } ?: try {
+                File("./icure-cli/plugins").takeIf { it.exists() && it.isDirectory() }?.path
             } catch (e: Exception) {
                 null
             } ?: throw IllegalStateException("No plugins directory found")
@@ -100,7 +108,7 @@ fun main(args: Array<String>) {
             .build()
 
         while (true) {
-            val commands = CommandsJarManager().commands()
+            val commands = CommandsJarManager().commands() + Exit()
             try {
                 val line = reader.readLine("IQR > ", "", null as MaskingCallback?, null)
                 val pl = reader.parser.parse(line, 0)
@@ -114,7 +122,6 @@ fun main(args: Array<String>) {
                     cmd.parse(argv.drop(1).toTypedArray())
                     println()
                 }
-
             } catch (e: PrintHelpMessage) {
                 println(e.context?.command?.getFormattedHelp() ?: "No help available")
                 println()
@@ -136,6 +143,7 @@ fun main(args: Array<String>) {
             }
         }
     } else RootCmd().subcommands(
+        Exit(),
         *(CommandsJarManager().commands().toTypedArray())
     ).main(args)
 }
