@@ -25,11 +25,18 @@ missing option --credentials
 IQR > api -u a:a deploy-codes -h
 Usage: api deploy-codes [<options>] [<path>]
 
+  Deploy codes on all sub-groups available to the user
+
 Options:
-  -h, --help  Show this message and exit
+  --xml=<value>   The XML format to apply. default, iso, thesaurus, thesaurusProc are supported
+  --type=<text>   The type of the codes to import. To be specified for XML files when the type cannot be deduced from the name of the file or when the cxml is pushed from the standard input.
+  --regex=<text>  Filter group ids by regex
+  --local / -l    Inject in user’s database instead of in all subGroups
+  -h, --help      Show this message and exit
 
 Arguments:
-  <path>  The path of the codes file to import. The codes file should be a JSON file with an array of objects with the following fields: id, code, type, version, regions, labels.
+  <path>  The path of the codes file to import. The codes file should be a JSON file with an array of objects with the following fields: id, code, type, version, regions, labels. XML files of diverse formats are supported if the --xml flag is present
+
 
 IQR > 
 ```
