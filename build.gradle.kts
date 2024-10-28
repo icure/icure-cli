@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.ajalt.clikt)
     implementation(libs.jline)
     implementation(libs.logback)
+    implementation(libs.xerces)
     testImplementation(kotlin("test"))
 }
 
