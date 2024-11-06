@@ -2,9 +2,10 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-io-ktor = "2.3.12"
+io-ktor = "3.0.0"
 
 [libraries]
+org-jetbrains-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.9.0" }
 io-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "io-ktor" }
 io-ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "io-ktor" }
 io-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "io-ktor" }
@@ -12,11 +13,12 @@ io-ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref =
 io-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "io-ktor" }
 org-jetbrains-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.7.1" }
 com-github-ajalt-clikt = { module = "com.github.ajalt.clikt:clikt", version = "4.3.0" }
-icure-sdk = { group = "com.icure", name = "icure-sdk", version = "0.2.26" }
+icure-sdk = { group = "com.icure", name = "cardinal-sdk", version = "1.0.0-RC.2"}
 ajalt-clikt = { group = "com.github.ajalt.clikt", name = "clikt", version = "4.2.2" }
 jline = {group = "org.jline", name = "jline", version = "3.25.1" }
 logback = { group = "ch.qos.logback", name = "logback-classic", version = "1.5.3" }
 xerces = { group = "xerces", name ="xercesImpl", version ="2.12.2" }
+io-github-reidsync-kotlin-json-patch = { group = "io.github.reidsync", name = "kotlin-json-patch", version = "1.0.0" }
 
 [bundles]
 io-ktor = [
