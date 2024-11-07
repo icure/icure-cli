@@ -1,9 +1,16 @@
+import com.github.jk1.license.render.CsvReportRenderer
+import com.github.jk1.license.render.ReportRenderer
+
 plugins {
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.serialization") version "1.9.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-
+    id("com.github.jk1.dependency-license-report") version "2.0"
     application
+}
+
+licenseReport {
+    renderers = arrayOf<ReportRenderer>(CsvReportRenderer())
 }
 
 buildscript {
