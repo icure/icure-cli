@@ -43,22 +43,24 @@ class CommandsJarManager {
             try {
                 File(this.javaClass.getProtectionDomain().codeSource.location.toURI()).takeIf { it.exists() }?.parentFile?.parentFile?.let {
                     File(it, "plugins")
-                }?.takeIf { it.isDirectory() }?.path
+                }?.takeIf { it.isDirectory() }?.toPath()?.toRealPath()?.toString()
             } catch (e: Exception) {
                 null
             } ?: try {
-                File("./plugins").takeIf { it.exists() && it.isDirectory() }?.path
+                File("./plugins").toPath().toRealPath().toString().let { File(it) }.takeIf { it.exists() && it.isDirectory() }?.path
             } catch (e: Exception) {
                 null
             } ?: try {
-                File("~/.iqr/plugins").takeIf { it.exists() && it.isDirectory() }?.path
+                File("~/.iqr/plugins").toPath().toRealPath().toString().let { File(it) }.takeIf { it.exists() && it.isDirectory() }?.path
             } catch (e: Exception) {
                 null
             } ?: try {
-                File("./icure-cli/plugins").takeIf { it.exists() && it.isDirectory() }?.path
+                File("./icure-cli/plugins").toPath().toRealPath().toString().let { File(it) }.takeIf { it.exists() && it.isDirectory() }?.path
             } catch (e: Exception) {
                 null
             } ?: throw IllegalStateException("No plugins directory found")
+
+        println("Loading commands from $plugins")
 
         val classLoader = this.javaClass.classLoader
 
