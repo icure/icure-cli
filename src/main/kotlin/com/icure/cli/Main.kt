@@ -94,7 +94,7 @@ fun main(args: Array<String>) {
             terminal.size = Size(120, 40) // hard coded terminal size when redirecting
         }
         val executeThread = Thread.currentThread()
-        terminal.handle(Terminal.Signal.INT) { signal -> executeThread.interrupt() }
+        terminal.handle(Terminal.Signal.INT) { _ -> executeThread.interrupt() }
 
         val reader = LineReaderBuilder.builder()
             .terminal(terminal)
