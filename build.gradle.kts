@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
-    kotlin("plugin.serialization") version "2.0.20"
+    kotlin("jvm") version "2.1.20"
+    kotlin("plugin.serialization") version "2.1.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
 
     application
@@ -31,8 +31,6 @@ java {
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
 }
-
-val ktorVersion = "2.3.9"
 
 dependencies {
     implementation(libs.bundles.io.ktor)
