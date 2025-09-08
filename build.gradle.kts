@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.xerces)
     implementation(libs.io.github.reidsync.kotlin.json.patch)
+    implementation(libs.apache.commons)
     testImplementation(kotlin("test"))
 }
 

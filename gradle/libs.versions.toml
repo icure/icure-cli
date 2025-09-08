@@ -3,6 +3,7 @@
 
 [versions]
 io-ktor = "3.1.1"
+cardinal = "2.0.0-PREVIEW-5"
 
 [libraries]
 org-jetbrains-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.10.1" }
@@ -19,6 +20,8 @@ jline = {group = "org.jline", name = "jline", version = "3.25.1" }
 logback = { group = "ch.qos.logback", name = "logback-classic", version = "1.5.3" }
 xerces = { group = "xerces", name ="xercesImpl", version ="2.12.2" }
 io-github-reidsync-kotlin-json-patch = { group = "io.github.reidsync", name = "kotlin-json-patch", version = "1.0.0" }
+apache-commons = { group = "commons-codec", name = "commons-codec", version = "1.18.0" }
+cardinal-sdk = { module = "com.icure:cardinal-sdk", version.ref = "cardinal" }
 
 [bundles]
 io-ktor = [
