@@ -3,7 +3,7 @@
 
 [versions]
 io-ktor = "3.1.1"
-cardinal = "2.0.0-PREVIEW-5"
+cardinal = "2.10.1"
 
 [libraries]
 org-jetbrains-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.10.1" }
