@@ -41,3 +41,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Plugin jars are build artifacts (copied in by the lib builds) ###
+plugins/*.jar
