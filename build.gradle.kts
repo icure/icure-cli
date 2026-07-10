@@ -20,7 +20,9 @@ buildscript {
 }
 
 group = "com.icure"
-version = "1.2-SNAPSHOT"
+// Overridable so release builds can stamp the distribution with the tag version:
+// ./gradlew :icure-cli:distZip -PcliVersion=1.3.0
+version = providers.gradleProperty("cliVersion").getOrElse("1.2-SNAPSHOT")
 
 repositories {
     mavenCentral()
