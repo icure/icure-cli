@@ -2,8 +2,8 @@ import com.github.jk1.license.render.CsvReportRenderer
 import com.github.jk1.license.render.ReportRenderer
 
 plugins {
-    kotlin("jvm") version "2.1.20"
-    kotlin("plugin.serialization") version "2.1.20"
+    kotlin("jvm") version "2.3.20"
+    kotlin("plugin.serialization") version "2.3.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("com.github.jk1.dependency-license-report") version "2.0"
     application
@@ -20,7 +20,9 @@ buildscript {
 }
 
 group = "com.icure"
-version = "1.0-SNAPSHOT"
+// Overridable so release builds can stamp the distribution with the tag version:
+// ./gradlew :icure-cli:distZip -PcliVersion=1.3.0
+version = providers.gradleProperty("cliVersion").getOrElse("1.2-SNAPSHOT")
 
 repositories {
     mavenCentral()
@@ -50,6 +52,7 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.xerces)
     implementation(libs.io.github.reidsync.kotlin.json.patch)
+    implementation(libs.apache.commons)
     testImplementation(kotlin("test"))
 }
 
