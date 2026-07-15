@@ -22,6 +22,7 @@ xerces = { group = "xerces", name ="xercesImpl", version ="2.12.2" }
 io-github-reidsync-kotlin-json-patch = { group = "io.github.reidsync", name = "kotlin-json-patch", version = "1.0.0" }
 apache-commons = { group = "commons-codec", name = "commons-codec", version = "1.18.0" }
 cardinal-sdk = { module = "com.icure:cardinal-sdk", version.ref = "cardinal" }
+com-google-cloud-storage = { module = "com.google.cloud:google-cloud-storage", version = "2.70.0"  }
 
 [bundles]
 io-ktor = [

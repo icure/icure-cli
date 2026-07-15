@@ -6,8 +6,6 @@ import com.github.ajalt.clikt.completion.CompletionCandidates
 import com.github.ajalt.clikt.core.*
 import com.github.ajalt.clikt.output.Localization
 import com.github.ajalt.clikt.output.ParameterFormatter
-import com.github.ajalt.clikt.parameters.arguments.Argument
-import com.github.ajalt.clikt.parameters.options.Option
 import org.jline.reader.*;
 import org.jline.reader.impl.DefaultParser;
 import org.jline.reader.impl.DefaultParser.Bracket;
@@ -17,8 +15,6 @@ import org.jline.terminal.TerminalBuilder;
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.jline.builtins.Completers
-import org.jline.reader.impl.completer.AggregateCompleter
-import org.jline.reader.impl.completer.ArgumentCompleter
 import org.jline.reader.impl.completer.NullCompleter
 import org.jline.reader.impl.completer.StringsCompleter
 import java.io.File
@@ -99,7 +95,7 @@ fun main(args: Array<String>) {
         val reader = LineReaderBuilder.builder()
             .terminal(terminal)
             .parser(parser)
-            .completer(CommandsJarManager().commands().makeJLineTreeCompleter())
+            .completer(CliktCompleter(CommandsJarManager().commands() + Exit()))
             .variable(LineReader.SECONDARY_PROMPT_PATTERN, "%M%P > ")
             .variable(LineReader.INDENTATION, 2)
             .variable(LineReader.LIST_MAX, 100)
@@ -150,44 +146,8 @@ fun main(args: Array<String>) {
     ).main(args)
 }
 
-internal fun List<CliktCommand>.makeJLineTreeCompleter(): Completer =
-    AggregateCompleter(this.map { it.makeJLineTreeCompleter(emptyList()) })
-
-internal fun CliktCommand.makeJLineTreeCompleter(): Completer =
-    AggregateCompleter(registeredSubcommands().map { it.makeJLineTreeCompleter(emptyList()) })
-
-internal fun CliktCommand.makeJLineTreeCompleter(parentCommandPath: List<CliktCommand>): Completer =
-    registeredSubcommands().let { subcommands ->
-        val commandPath = parentCommandPath + listOf(this)
-        if (subcommands.isEmpty()) {
-            val argumentCompleter = ArgumentCompleter(
-                commandPath.map { StringsCompleter(it.commandName) } + listOf(
-                    Completers.OptionCompleter(
-                        registeredArguments().map { it.makeJLineTreeCompleter() },
-                        { _ -> registeredOptions().flatMap { it.makeJLineDescription(this.currentContext) } },
-                        commandPath.size
-                    )
-                )
-            )
-            argumentCompleter
-        } else {
-            AggregateCompleter(subcommands.map { it.makeJLineTreeCompleter(commandPath) })
-        }
-    }
-
 internal fun CompletionCandidates.makeJLineCompleter() = when (this) {
     is CompletionCandidates.Fixed -> StringsCompleter(candidates)
     is CompletionCandidates.Path -> Completers.FileNameCompleter()
     else -> NullCompleter.INSTANCE
-}
-
-internal fun Option.makeJLineDescription(context: Context): List<Completers.OptDesc> {
-    val valueCompleter = completionCandidates.makeJLineCompleter()
-
-    return names.map { Completers.OptDesc(it, it, optionHelp(context), valueCompleter) } +
-            secondaryNames.map { Completers.OptDesc(it, it) }
-}
-
-internal fun Argument.makeJLineTreeCompleter(): Completer {
-    return NullCompleter.INSTANCE
 }

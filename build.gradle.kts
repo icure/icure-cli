@@ -44,6 +44,7 @@ tasks.named<JavaExec>("run") {
 dependencies {
     implementation(libs.bundles.io.ktor)
     implementation(libs.com.github.ajalt.clikt)
+    implementation(libs.com.google.cloud.storage)
     implementation(libs.org.jetbrains.kotlinx.coroutines.core)
     implementation(libs.org.jetbrains.kotlinx.serialization.json)
     implementation(libs.icure.sdk)
