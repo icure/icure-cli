@@ -99,6 +99,8 @@ fun main(args: Array<String>) {
             .variable(LineReader.SECONDARY_PROMPT_PATTERN, "%M%P > ")
             .variable(LineReader.INDENTATION, 2)
             .variable(LineReader.LIST_MAX, 100)
+            .variable(LineReader.HISTORY_FILE, Path.of(System.getProperty("user.home"), ".icure-cli-history"))
+            .option(LineReader.Option.HISTORY_INCREMENTAL, true)
             .option(LineReader.Option.INSERT_BRACKET, true)
             .option(LineReader.Option.EMPTY_WORD_OPTIONS, false)
             .option(LineReader.Option.USE_FORWARD_SLASH, true) // use forward slash in directory separator
