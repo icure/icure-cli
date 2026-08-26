@@ -137,7 +137,7 @@ fun main(args: Array<String>) {
             } catch (e: InterruptedException) {
                 continue
             } catch (e: Throwable) {
-                println("ERROR: ${e.cause}")
+                println("ERROR: ${e.cause ?: e}")
                 println()
                 continue
             }
