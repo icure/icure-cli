@@ -4,6 +4,7 @@
 [versions]
 io-ktor = "3.1.1"
 cardinal = "2.10.1"
+testcontainers = "2.0.5"
 
 [libraries]
 org-jetbrains-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.10.1" }
@@ -23,6 +24,9 @@ io-github-reidsync-kotlin-json-patch = { group = "io.github.reidsync", name = "k
 apache-commons = { group = "commons-codec", name = "commons-codec", version = "1.18.0" }
 cardinal-sdk = { module = "com.icure:cardinal-sdk", version.ref = "cardinal" }
 com-google-cloud-storage = { module = "com.google.cloud:google-cloud-storage", version = "2.70.0"  }
+org-testcontainers-testcontainers = { module = "org.testcontainers:testcontainers", version.ref = "testcontainers" }
+org-testcontainers-junit-jupiter = { module = "org.testcontainers:testcontainers-junit-jupiter", version.ref = "testcontainers" }
+org-slf4j-simple = { module = "org.slf4j:slf4j-simple", version = "2.0.9" }
 
 [bundles]
 io-ktor = [
